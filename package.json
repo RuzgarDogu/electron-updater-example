@@ -4,9 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "publish": "build -p always"
+    "pack": "electron-builder --dir",
+    "publish": "electron-builder -p always"
   },
   "repository": {
     "type": "git",
