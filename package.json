@@ -4,7 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "publish": "build -p always"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,21 @@
   "dependencies": {
     "electron-log": "^4.2.2",
     "electron-updater": "^4.3.1"
+  },
+  "build": {
+    "publish": [{
+         "provider": "github",
+         "owner": "RuzgarDogu",
+         "repo": "electron-updater-example",
+         "releaseType": "draft"
+     }],
+    "appId": "com.github.RuzgarDogu.electronupdaterexample",
+    "mac": {
+      "category": "your.app.category.type",
+      "target": [
+        "zip",
+        "dmg"
+      ]
+    }
   }
 }
