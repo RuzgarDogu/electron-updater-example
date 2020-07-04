@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/RuzgarDogu/electron-updater-example/issues"
   },
-  "homepage": "https://github.com/RuzgarDogu/electron-updater-example#readme"
+  "homepage": "https://github.com/RuzgarDogu/electron-updater-example#readme",
+  "devDependencies": {
+    "electron": "^9.0.5",
+    "electron-builder": "^22.7.0"
+  },
+  "dependencies": {
+    "electron-log": "^4.2.2",
+    "electron-updater": "^4.3.1"
+  }
 }
