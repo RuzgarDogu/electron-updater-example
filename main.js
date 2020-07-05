@@ -144,3 +144,4 @@ app.on('ready', function()  {
 // autoUpdater.on('update-downloaded', (info) => {
 //   autoUpdater.quitAndInstall();
 // })
+//
