@@ -6,7 +6,7 @@
 <body>
   Current version: <span id="version">vX.Y.Z</span>
   <div id="messages"></div>
-
+  <input type="button" name="" id="testButton" value="Disabled button" disabled>
 <script>
 // Display the current version
 let version = window.location.hash.substring(1);
@@ -16,9 +16,12 @@ document.getElementById('version').innerText = version;
 const {ipcRenderer} = require('electron');
 ipcRenderer.on('message', function(event, text) {
   var container = document.getElementById('messages');
-  var message = document.createElement('div');
-  message.innerHTML = text;
-  container.innerHTML(message);
+  // var message = document.createElement('div');
+  container.innerHTML = text;
+  // container.appendChild(message);
+  if(text == "Update downloaded") {
+    document.getElementById("testButton").disabled = false;
+  }
 })
 </script>
 </body>
