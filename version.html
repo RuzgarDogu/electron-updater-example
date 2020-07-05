@@ -16,6 +16,9 @@ document.getElementById('version').innerText = version;
 // Listen for messages
 const {ipcRenderer} = require('electron');
 ipcRenderer.on('message', function(event, args) {
+  console.log('-----------------------')
+  console.log(args.status)
+  console.log('-----------------------')
   var container = document.getElementById('messages');
   var message = document.createElement('div');
   message.innerHTML = args.text;
