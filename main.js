@@ -56,7 +56,7 @@ let win;
 
 function sendStatusToWindow(text) {
   log.info(text);
-  win.webContents.send('message', text);
+  win.webContents.send('updateMessage', text);
 }
 function createDefaultWindow() {
   win = new BrowserWindow({
@@ -91,6 +91,7 @@ autoUpdater.on('download-progress', (progressObj) => {
 })
 autoUpdater.on('update-downloaded', (info) => {
   sendStatusToWindow('Update downloaded');
+  autoUpdater.quitAndInstall();
 });
 app.on('ready', function() {
   // Create the Menu
