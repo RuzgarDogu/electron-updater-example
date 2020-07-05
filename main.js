@@ -87,10 +87,11 @@ autoUpdater.on('download-progress', (progressObj) => {
   let log_message = "Download speed: " + progressObj.bytesPerSecond;
   log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
   log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-  sendStatusToWindow(log_message);
+  sendStatusToWindow(progressObj.percent);
 })
 autoUpdater.on('update-downloaded', (info) => {
   sendStatusToWindow('Update downloaded');
+  app.quit();
 });
 app.on('ready', function() {
   // Create the Menu
