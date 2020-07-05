@@ -118,7 +118,9 @@ app.on('window-all-closed', () => {
 // app quits.
 //-------------------------------------------------------------------
 app.on('ready', function()  {
-  autoUpdater.checkForUpdatesAndNotify();
+  autoUpdater.checkForUpdatesAndNotify((d)=>{
+    console.log("burada ne oluyor acaba?",d);
+  });
 });
 
 //-------------------------------------------------------------------
