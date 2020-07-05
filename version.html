@@ -15,12 +15,12 @@ document.getElementById('version').innerText = version;
 
 // Listen for messages
 const {ipcRenderer} = require('electron');
-ipcRenderer.on('updateMessage', function(event, text) {
+ipcRenderer.on('updateMessage', function(event, status) {
   var container = document.getElementById('messages');
   // var message = document.createElement('div');
-  container.innerHTML = text;
+  container.innerHTML = status;
   // container.appendChild(message);
-  if(text == "Update downloaded") {
+  if(status == "doneUpdate" || status == "noUpdate") {
     document.getElementById("testButton").disabled = false;
   }
 })
