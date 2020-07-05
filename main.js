@@ -22,25 +22,25 @@ log.info('App starting...');
 //
 // THIS SECTION IS NOT REQUIRED
 //-------------------------------------------------------------------
-let template = []
-if (process.platform === 'darwin') {
-  // OS X
-  const name = app.getName();
-  template.unshift({
-    label: name,
-    submenu: [
-      {
-        label: 'About ' + name,
-        role: 'about'
-      },
-      {
-        label: 'Quit',
-        accelerator: 'Command+Q',
-        click() { app.quit(); }
-      },
-    ]
-  })
-}
+// let template = []
+// if (process.platform === 'darwin') {
+//   // OS X
+//   const name = app.getName();
+//   template.unshift({
+//     label: name,
+//     submenu: [
+//       {
+//         label: 'About ' + name,
+//         role: 'about'
+//       },
+//       {
+//         label: 'Quit',
+//         accelerator: 'Command+Q',
+//         click() { app.quit(); }
+//       },
+//     ]
+//   })
+// }
 
 
 //-------------------------------------------------------------------
@@ -58,6 +58,7 @@ function sendStatusToWindow(text) {
   log.info(text);
   win.webContents.send('message', text);
 }
+
 function createDefaultWindow() {
   win = new BrowserWindow({
     webPreferences: {
@@ -71,6 +72,7 @@ function createDefaultWindow() {
   win.loadURL(`file://${__dirname}/version.html#v${app.getVersion()}`);
   return win;
 }
+
 autoUpdater.on('checking-for-update', () => {
   sendStatusToWindow('Checking for update...');
 })
@@ -90,15 +92,17 @@ autoUpdater.on('download-progress', (progressObj) => {
   sendStatusToWindow(log_message);
 })
 autoUpdater.on('update-downloaded', (info) => {
-  sendStatusToWindow('Update downloaded');
+  sendStatusToWindow('Güncelleme tamamlandı, program yeniden başlatılıyor...');
+  app.relaunch()
+  app.exit()
 });
-app.on('ready', function() {
-  // Create the Menu
-  const menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
-
-  createDefaultWindow();
-});
+// app.on('ready', function() {
+//   // Create the Menu
+//   const menu = Menu.buildFromTemplate(template);
+//   Menu.setApplicationMenu(menu);
+//
+//   createDefaultWindow();
+// });
 app.on('window-all-closed', () => {
   app.quit();
 });
