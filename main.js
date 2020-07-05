@@ -54,9 +54,12 @@ if (process.platform === 'darwin') {
 //-------------------------------------------------------------------
 let win;
 
-function sendStatusToWindow(text) {
+function sendStatusToWindow(text=null,status=null,extras=null) {
   log.info(text);
-  win.webContents.send('message', text);
+  args.text = text
+  args.status = status
+  args.extras = extras
+  win.webContents.send('message', args);
 }
 function createDefaultWindow() {
   win = new BrowserWindow({
@@ -72,30 +75,30 @@ function createDefaultWindow() {
   return win;
 }
 autoUpdater.on('checking-for-update', () => {
-  sendStatusToWindow('Checking for update...');
+  sendStatusToWindow('Checking for update...','updateCheck');
 })
 autoUpdater.on('update-available', (info) => {
-  sendStatusToWindow('Update available.');
+  sendStatusToWindow('Update available.','updateVar');
 })
 autoUpdater.on('update-not-available', (info) => {
-  sendStatusToWindow('Update not available.');
+  sendStatusToWindow('Update not available.','updateYok');
 })
 autoUpdater.on('error', (err) => {
-  sendStatusToWindow('Error in auto-updater. ' + err);
+  sendStatusToWindow('Error in auto-updater. ' + err,'updateHata');
 })
 autoUpdater.on('download-progress', (progressObj) => {
   let log_message = "Download speed: " + progressObj.bytesPerSecond;
   log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
   log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
-  sendStatusToWindow(log_message);
+  sendStatusToWindow(log_message,'updateNow',{bytes:bytesPerSecond, percent: progressObj.percent, transfer:progressObj.transferred});
 })
 autoUpdater.on('update-downloaded', (info) => {
   sendStatusToWindow('Update downloaded');
 });
 app.on('ready', function() {
   // Create the Menu
-  const menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
+  // const menu = Menu.buildFromTemplate(template);
+  // Menu.setApplicationMenu(menu);
 
   createDefaultWindow();
 });

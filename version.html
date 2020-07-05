@@ -7,6 +7,7 @@
   <p>This is the updated version</p>
   Current version: <span id="version">vX.Y.Z</span>
   <div id="messages"></div>
+  <input type="button" disabled>
 <script>
 // Display the current version
 let version = window.location.hash.substring(1);
@@ -14,11 +15,14 @@ document.getElementById('version').innerText = version;
 
 // Listen for messages
 const {ipcRenderer} = require('electron');
-ipcRenderer.on('message', function(event, text) {
+ipcRenderer.on('message', function(event, args) {
   var container = document.getElementById('messages');
   var message = document.createElement('div');
-  message.innerHTML = text;
+  message.innerHTML = args.text;
   container.appendChild(message);
+  console.log(args.extras.bytes)
+  console.log(args.extras.percent)
+  console.log(args.extras.transfer)
 })
 </script>
 </body>
