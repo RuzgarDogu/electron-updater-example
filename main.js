@@ -58,7 +58,6 @@ function sendStatusToWindow(text) {
   log.info(text);
   win.webContents.send('message', text);
 }
-
 function createDefaultWindow() {
   win = new BrowserWindow({
     webPreferences: {
@@ -92,9 +91,7 @@ autoUpdater.on('download-progress', (progressObj) => {
   sendStatusToWindow(log_message);
 })
 autoUpdater.on('update-downloaded', (info) => {
-  sendStatusToWindow('Güncelleme tamamlandı, program yeniden başlatılıyor...');
-  app.relaunch()
-  app.exit()
+  sendStatusToWindow('Update downloaded');
 });
 // app.on('ready', function() {
 //   // Create the Menu
@@ -118,9 +115,7 @@ app.on('window-all-closed', () => {
 // app quits.
 //-------------------------------------------------------------------
 app.on('ready', function()  {
-  autoUpdater.checkForUpdatesAndNotify((d)=>{
-    console.log("burada ne oluyor acaba?",d);
-  });
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 //-------------------------------------------------------------------
