@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/RuzgarDogu/electron-updater-example#readme",
   "devDependencies": {
-    "electron": "^9.0.5",
+    "electron": "^18.3.7",
     "electron-builder": "^22.7.0"
   },
   "dependencies": {
